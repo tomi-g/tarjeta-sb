@@ -4266,56 +4266,22 @@
            CBU MODAL
         ====================================================== */
 
-        const cbuModal = document.getElementById('cbuModal');
-        const openCbuModal = document.getElementById('openCbuModal');
-        const openCbuModalFromCosto = document.getElementById('openCbuModalFromCosto');
+        const openCbuModal = document.getElementById('openCbuModalFromCosto');
         const closeCbuModal = document.getElementById('closeCbuModal');
+        const cbuModal = document.getElementById('cbuModal');
 
-        function openModal() {
+        openCbuModal.addEventListener('click', () => {
             cbuModal.classList.add('active');
-            body.classList.add('locked');
-        }
+        });
 
-        function closeModal() {
+        closeCbuModal.addEventListener('click', () => {
             cbuModal.classList.remove('active');
-            body.classList.remove('locked');
-        }
-
-        openCbuModal.addEventListener('click', openModal);
-        openCbuModalFromCosto.addEventListener('click', openModal);
-        closeCbuModal.addEventListener('click', closeModal);
-
-        cbuModal.addEventListener('click', event => {
-            if (event.target === cbuModal) {
-                closeModal();
-            }
         });
 
-        document.addEventListener('keydown', event => {
-            if (event.key === 'Escape' && cbuModal.classList.contains('active')) {
-                closeModal();
+        cbuModal.addEventListener('click', (e) => {
+            if (e.target === cbuModal) {
+                cbuModal.classList.remove('active');
             }
-        });
-
-        // Función para copiar al portapapeles
-        function copyToClipboard(text, button) {
-            navigator.clipboard.writeText(text).then(() => {
-                const originalText = button.textContent;
-                button.textContent = '¡Copiado!';
-                setTimeout(() => {
-                    button.textContent = originalText;
-                }, 2000);
-            }).catch(err => {
-                console.error('Error al copiar:', err);
-            });
-        }
-
-        // Agregar eventos a los botones de copiar
-        document.querySelectorAll('.copy-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const textToCopy = btn.getAttribute('data-copy');
-                copyToClipboard(textToCopy, btn);
-            });
         });
 
     </script>
